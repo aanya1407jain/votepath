@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VotePath — Election Process Assistant</title>
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🗳️</text></svg>" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css" />
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+    <!-- Google Maps -->
+    <script>
+        window.initMap = function () { window.mapsReady = true; };
+    </script>
+</head>
+
+<body>
+
+    <!-- ── NAV ────────────────────────────────────────────── -->
+    <nav class="nav" id="mainNav">
+        <div class="nav-inner">
+            <a class="nav-logo" href="#hero">
+                <span class="logo-icon">🗳️</span>
+                <span>VotePath</span>
+            </a>
+            <div class="nav-links">
+                <a href="#steps">Steps</a>
+                <a href="#timeline">Timeline</a>
+                <a href="#faq">FAQ</a>
+                <a href="#quiz">Quiz</a>
+                <a href="#polling">Polling</a>
+                <a href="#chatbot">Ask AI</a>
+            </div>
+            <div class="nav-right">
+                <button class="lang-btn" id="translateBtn" title="Translate page">🌐 Translate</button>
+                <div id="google_translate_element" class="translate-widget"></div>
+            </div>
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">☰</button>
+        </div>
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="#steps" onclick="closeMobile()">Steps</a>
+            <a href="#timeline" onclick="closeMobile()">Timeline</a>
+            <a href="#faq" onclick="closeMobile()">FAQ</a>
+            <a href="#quiz" onclick="closeMobile()">Quiz</a>
+            <a href="#polling" onclick="closeMobile()">Polling</a>
+            <a href="#chatbot" onclick="closeMobile()">Ask AI</a>
+        </div>
+    </nav>
+
+    <!-- ── HERO ───────────────────────────────────────────── -->
+    <section class="hero" id="hero">
+        <div class="hero-bg">
+            <div class="star star-1">★</div>
+            <div class="star star-2">★</div>
+            <div class="star star-3">★</div>
+            <div class="star star-4">★</div>
+            <div class="star star-5">★</div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-badge">Your Democratic Guide</div>
+            <h1 class="hero-title">
+                Understand<br />
+                <em>Every Step</em><br />
+                of Your Vote
+            </h1>
+            <p class="hero-sub">From registering to results — a complete, interactive guide to the American election
+                process. Powered by AI and built for every voter.</p>
+            <div class="hero-ctas">
+                <a href="#steps" class="btn btn-primary">Explore the Process</a>
+                <a href="#chatbot" class="btn btn-ghost">Ask the AI →</a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat"><span class="stat-num">7</span><span class="stat-lbl">Steps Explained</span></div>
+                <div class="stat"><span class="stat-num">5</span><span class="stat-lbl">Quiz Questions</span></div>
+                <div class="stat"><span class="stat-num">∞</span><span class="stat-lbl">AI Q&amp;A</span></div>
+            </div>
+        </div>
+        <div class="hero-scroll">Scroll to explore ↓</div>
+    </section>
+
+    <!-- ── STEPS ──────────────────────────────────────────── -->
+    <section class="section" id="steps">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">How It Works</span>
+                <h2>The Election Journey</h2>
+                <p>Seven essential steps — from eligibility to certification</p>
+            </div>
+            <div class="steps-grid" id="stepsGrid">
+                <!-- injected by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ── TIMELINE ───────────────────────────────────────── -->
+    <section class="section alt-bg" id="timeline">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Calendar View</span>
+                <h2>Election Timeline</h2>
+                <p>Key dates from primary season to Inauguration Day</p>
+            </div>
+            <div class="timeline-wrap">
+                <div class="timeline-line"></div>
+                <div class="timeline-events" id="timelineEvents">
+                    <!-- injected by JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── FAQ ────────────────────────────────────────────── -->
+    <section class="section" id="faq">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Common Questions</span>
+                <h2>Frequently Asked</h2>
+                <p>Clear answers to your most pressing voting questions</p>
+            </div>
+            <div class="faq-grid" id="faqGrid">
+                <!-- injected by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ── QUIZ ───────────────────────────────────────────── -->
+    <section class="section alt-bg" id="quiz">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Test Yourself</span>
+                <h2>Voter Knowledge Quiz</h2>
+                <p>Five questions — see how much you know</p>
+            </div>
+            <div class="quiz-wrap">
+                <div class="quiz-box" id="quizBox">
+                    <!-- injected by JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── POLLING LOCATOR ────────────────────────────────── -->
+    <section class="section" id="polling">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Find Your Polling Place</span>
+                <h2>Nearby Polling Locations</h2>
+                <p>Enter your address to find polling places near you</p>
+            </div>
+            <div class="polling-wrap">
+                <div class="polling-search">
+                    <input type="text" id="pollingAddress" placeholder="Enter your street address, city, state…" />
+                    <button class="btn btn-primary" id="findPollingBtn">Find Locations</button>
+                </div>
+                <div id="map" class="map-container"></div>
+                <div id="pollingResults" class="polling-results"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── LEADERBOARD ────────────────────────────────────── -->
+    <section class="section alt-bg" id="leaderboard">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Community</span>
+                <h2>Quiz Leaderboard</h2>
+                <p>Top scores from civics champions worldwide</p>
+            </div>
+            <div class="lb-wrap">
+                <div class="lb-table" id="leaderboardTable">
+                    <div class="lb-loading">Loading scores…</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── CHATBOT ────────────────────────────────────────── -->
+    <section class="section" id="chatbot">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Powered by Gemini AI</span>
+                <h2>Ask the Election Assistant</h2>
+                <p>Get instant, accurate answers to any voting question</p>
+            </div>
+            <div class="chat-wrap">
+                <div class="chat-window" id="chatWindow">
+                    <div class="chat-msg bot">
+                        <div class="chat-avatar">🗳️</div>
+                        <div class="chat-bubble">
+                            Hi! I'm your Election Assistant powered by Google Gemini. Ask me anything about voting,
+                            elections, candidates, or the democratic process!
+                            <div class="chat-suggestions">
+                                <button class="suggestion" onclick="sendSuggestion('How do I register to vote?')">How do
+                                    I register to vote?</button>
+                                <button class="suggestion"
+                                    onclick="sendSuggestion('What is the Electoral College?')">What is the Electoral
+                                    College?</button>
+                                <button class="suggestion" onclick="sendSuggestion('Can I vote by mail?')">Can I vote by
+                                    mail?</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-input-wrap">
+                    <input type="text" id="chatInput" placeholder="Ask about voting, registration, candidates…" />
+                    <button class="chat-send" id="chatSend">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <line x1="22" y1="2" x2="11" y2="13" />
+                            <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── FOOTER ─────────────────────────────────────────── -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <span class="logo-icon">🗳️</span>
+                    <strong>VotePath</strong>
+                    <p>Making democracy accessible for every American citizen.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <a href="https://vote.gov" target="_blank">Vote.gov</a>
+                    <a href="https://www.usa.gov/absentee-voting" target="_blank">Absentee Voting</a>
+                    <a href="https://www.fec.gov" target="_blank">FEC.gov</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 VotePath — Built for the Google Antigravity Challenge. For educational purposes only.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Google Translate -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'es,fr,zh-CN,hi,ar,pt,de,ko,ja,ru,vi,tl,pl',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+    </script>
+    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async></script>
+
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/quiz.js"></script>
+    <script src="js/map.js"></script>
+    <script src="js/chat.js"></script>
+    <script src="js/firebase-config.js"></script>
+
+    <!-- Google Maps (loads after app.js sets the callback) -->
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyXXXXYOURKEYXXXXX&libraries=places&callback=initMap"
+        async defer></script>
+</body>
+
+</html>
