@@ -1165,9 +1165,10 @@ button {
 }
 
 .chat-msg.bot .chat-bubble {
-    background: rgba(255, 255, 255, .08);
-    color: rgba(255, 255, 255, .9);
+    background: rgba(255, 255, 255, .13);
+    color: rgba(255, 255, 255, .95);
     border-radius: 4px 16px 16px 16px;
+    border: 1px solid rgba(255, 255, 255, .1);
 }
 
 .chat-msg.user .chat-bubble {
