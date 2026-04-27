@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.addEventListener('click', () => {
         const address = input.value.trim();
         if (!address) {
-            showPollingMsg('Please enter an address.');
+            showPollingMsg('⚠️ Please enter an address.');
             return;
         }
         if (!window.mapsReady || !geocoder) {
@@ -240,7 +240,7 @@ function showMapPlaceholder() {
 
 function showPollingMsg(msg, spinner = false) {
     const el = document.getElementById('pollingResults');
-    if (el) el.innerHTML = `<p style="text-align:center;color:var(--gray-4);padding:20px">${spinner ? '<span class="spinner">⏳</span> ' : ''}${msg}</p>`;
+    if (el) el.innerHTML = `<p style="text-align:center;color:var(--navy);padding:20px">${spinner ? '<span class="spinner">⏳</span> ' : ''}${msg}</p>`;
 }
 
 function clearMarkers() {
