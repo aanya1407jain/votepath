@@ -16,7 +16,7 @@
     <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
     <!-- Google Maps -->
     <script>
-        window.initMap = function () { window.mapsReady = true; };
+        window.initMap = function () { window.mapsReady = false; };
     </script>
 </head>
 
@@ -181,7 +181,7 @@
     </section>
 
     <!-- ── CHATBOT ────────────────────────────────────────── -->
-    <section class="section" id="chatbot">
+    <section class="section alt-bg" id="chatbot">
         <div class="container">
             <div class="section-header">
                 <span class="section-tag">Powered by Gemini AI</span>
@@ -262,11 +262,6 @@
     <script src="js/map.js"></script>
     <script src="js/chat.js"></script>
     <script src="js/firebase-config.js"></script>
-
-    <!-- Google Maps (loads after app.js sets the callback) -->
-    <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyXXXXYOURKEYXXXXX&libraries=places&callback=initMap"
-        async defer></script>
 </body>
 
 </html>
